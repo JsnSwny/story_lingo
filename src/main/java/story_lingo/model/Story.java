@@ -3,6 +3,7 @@ package story_lingo.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "stories")
@@ -12,7 +13,14 @@ public class Story {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_posted")
-    private Date datePosted;
+    private Date dateCreated;
+
+    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
+    private List<Translation> translations;
+
+    public Story() {
+
+    }
 
     public Long getId() {
         return id;
@@ -22,11 +30,11 @@ public class Story {
         this.id = id;
     }
 
-    public Date getDatePosted() {
-        return datePosted;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDatePosted(Date datePosted) {
-        this.datePosted = datePosted;
+    public void setDateCreated(Date datePosted) {
+        this.dateCreated = datePosted;
     }
 }
