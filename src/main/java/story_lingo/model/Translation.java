@@ -22,12 +22,18 @@ public class Translation {
     private Instant createdOn;
 
     @ManyToOne
+    @JoinColumn(name = "language_id")
+    private Language language;
+
+    @ManyToOne
     @JoinColumn(name = "story_id")
     private Story story;
 
-    public Translation(String title, String content) {
+    public Translation(String title, String content, Language language, Story story) {
         this.title = title;
         this.content = content;
+        this.language = language;
+        this.story = story;
     }
 
     public Translation() {
@@ -71,5 +77,13 @@ public class Translation {
 
     public void setStory(Story story) {
         this.story = story;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 }
