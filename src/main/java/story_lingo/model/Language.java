@@ -1,5 +1,6 @@
 package story_lingo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Language {
     private String name;
 
     @OneToMany(mappedBy = "language", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Translation> translations;
 
     public Language() {

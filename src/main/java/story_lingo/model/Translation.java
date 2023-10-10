@@ -1,9 +1,10 @@
 package story_lingo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -15,18 +16,20 @@ public class Translation {
 
     private String title;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @CreationTimestamp
-    private Instant createdOn;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "language_id")
+    @JsonBackReference
     private Language language;
 
     @ManyToOne
     @JoinColumn(name = "story_id")
+    @JsonBackReference
     private Story story;
 
     public Translation(String title, String content, Language language, Story story) {
@@ -63,14 +66,6 @@ public class Translation {
         this.content = content;
     }
 
-    public Instant getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(Instant createdOn) {
-        this.createdOn = createdOn;
-    }
-
     public Story getStory() {
         return story;
     }
@@ -85,5 +80,9 @@ public class Translation {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }

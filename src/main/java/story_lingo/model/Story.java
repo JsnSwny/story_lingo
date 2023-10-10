@@ -1,5 +1,6 @@
 package story_lingo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,6 +19,7 @@ public class Story {
     private Instant createdOn;
 
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Translation> translations;
 
     public Story() {
