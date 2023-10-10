@@ -1,7 +1,9 @@
 package story_lingo.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +13,8 @@ public class Story {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_posted")
-    private Date dateCreated;
+    @CreationTimestamp
+    private Instant createdOn;
 
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
     private List<Translation> translations;
@@ -30,11 +31,19 @@ public class Story {
         this.id = id;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public Instant getCreatedOn() {
+        return createdOn;
     }
 
-    public void setDateCreated(Date datePosted) {
-        this.dateCreated = datePosted;
+    public void setCreatedOn(Instant createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public List<Translation> getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
     }
 }
