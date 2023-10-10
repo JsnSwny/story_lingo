@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Story {
     private List<Translation> translations;
 
     public Story() {
-
+        this.translations = new ArrayList<>();
     }
 
     public Long getId() {
